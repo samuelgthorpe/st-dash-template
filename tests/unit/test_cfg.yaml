@@ -1,0 +1,17 @@
+# defines block experiment to run in the configured order
+
+ExampleBlock1:
+  module: st_dash_template.experiment.example_block
+  example_param: dummy
+
+ExampleBlock2:
+  module: st_dash_template.experiment.example_block
+  example_params_list:
+    - dummy0
+    - dummy1
+
+ExampleVisBlock:
+  module: st_dash_template.experiment.vis.example_vis_block
+  example_params_dict:
+    key0: val0
+    key1: val1
