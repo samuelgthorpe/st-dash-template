@@ -12,9 +12,9 @@ Written by Samuel Thorpe
 # # Imports
 # -----------------------------------------------------|
 import argparse
+from dash import Dash, html
 from sampy.utils.logger import init_log
 from st_dash_template import BASE_DIR
-from st_dash_template.experiment import Experiment
 
 
 # # Main Method
@@ -22,10 +22,10 @@ from st_dash_template.experiment import Experiment
 def main(cfg_file, **kwrgs):
     """Run main method."""
     init_log(BASE_DIR)
-    exp = Experiment(cfg_file, **kwrgs)
-    exp.run()
+    app = Dash()
+    app.layout = [html.Div(children='Hello World')]
 
-    return exp
+    return app
 
 
 # # Main Entry
@@ -35,7 +35,8 @@ if __name__ == "__main__":  # pragma: no cover
     parser.add_argument(
         '-cfg',
         type=str,
-        help='path to experiment cfg',
+        help='path to app cfg',
         default="st_dash_template/cfg.yaml")
     args = parser.parse_args()
-    exp = main(args.cfg)
+    app = main(args.cfg)
+    app.run(debug=True)

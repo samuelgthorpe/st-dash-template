@@ -4,3 +4,5 @@ boto3
 psutil
 PyYAML
 git+https://${GITHUB_TOKEN}@github.com/samuelgthorpe/sampy.git@main
+dash
+plotly
