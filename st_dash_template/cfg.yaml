@@ -1,4 +1,0 @@
-# defines block experiment to run in the configured order
-
-DevBlock:
-  module: st_dash_template.experiment.dev_block
