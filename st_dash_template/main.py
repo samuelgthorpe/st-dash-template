@@ -35,13 +35,19 @@ from dash import (
 def build_layout():
     """Build the app layout."""
     return [
+        html.H2(
+            f' {data["dct"]["meta"]["name"]} Dataset'
+            ),
         dcc.Markdown(f'''
-            ### {data['dct']['meta']['name']} Dataset
             {data['desc']}
             '''),
         dash_table.DataTable(
             data=data['dfr'].to_dict('records'),
-            page_size=5
+            page_size=5,
+            style_header={
+                'color': '#333333',
+                'fontWeight': 'bold'
+                 },
             ),
         html.Div([
             html.Div(
@@ -50,8 +56,7 @@ def build_layout():
                 ),
             dcc.Textarea(
                 id='textarea-example',
-                value='input cmd',
-                style={'width': '100%', 'height': 30},
+                style={'width': '99%', 'height': 30},
                 ),
             html.Button(
                 'Submit',
@@ -106,7 +111,7 @@ def handle_response(response):
 
     children = [
         dcc.Markdown(
-            code_block(response, 'python'),
+            f'''{code_block(response, 'python')}''',
             id='markdown-example-output',
             style={
                 "white-space": "pre",
@@ -164,7 +169,7 @@ def munge_validate_response(response):
 # -----------------------------------------------------|
 def main():
     """Run main method."""
-    app = Dash()
+    app = Dash(__name__)
     app.layout = build_layout()
     app.run(debug=True)
 
