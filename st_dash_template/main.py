@@ -64,7 +64,7 @@ def build_layout():
                 id='textarea-state-example-button',
                 n_clicks=0),
             html.Div(
-                '\nOutput',
+                '\nPython Output',
                 style={'whiteSpace': 'pre-line'}
                 ),
             html.Div(
@@ -114,9 +114,7 @@ def handle_response(response):
         dcc.Markdown(
             code_block(response, 'python'),
             dangerously_allow_html=True,
-            style={
-                "overflow-x": "scroll"
-            }
+            style={"overflow-x": "scroll"}
         )
     ]
 
@@ -129,9 +127,7 @@ def handle_response(response):
             dcc.Markdown(
                 f'Evaluated Response: \n{evaluated}',
                 dangerously_allow_html=True,
-                style={
-                    "overflow-x": "scroll"
-                    }
+                style={"overflow-x": "scroll"}
                 )
             )
 
