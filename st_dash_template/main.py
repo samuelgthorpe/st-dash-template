@@ -109,7 +109,6 @@ def handle_response(response):
     """Based on the completion content, build htm children."""
     response = munge_validate_response(response)
     evaluated = evaluate_response(response)
-
     children = [
         dcc.Markdown(
             code_block(response, 'python'),
