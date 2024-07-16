@@ -12,3 +12,5 @@ dash
 plotly
 markdown-strings
 openai
+dash-extensions
+dash_bootstrap_components

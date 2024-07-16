@@ -19,6 +19,7 @@ import pandas  # noqa
 import numpy  # noqa
 import scipy  # noqa
 import stats  # noqa
+import dash_bootstrap_components as dbc  # noqa
 from dash import (
     Dash,
     html,
@@ -111,10 +112,9 @@ def handle_response(response):
 
     children = [
         dcc.Markdown(
-            f'''{code_block(response, 'python')}''',
-            id='markdown-example-output',
+            code_block(response, 'python'),
+            dangerously_allow_html=True,
             style={
-                "white-space": "pre",
                 "overflow-x": "scroll"
             }
         )
@@ -128,9 +128,8 @@ def handle_response(response):
         children.append(
             dcc.Markdown(
                 f'Evaluated Response: \n{evaluated}',
-                id='markdown-example-output',
+                dangerously_allow_html=True,
                 style={
-                    "white-space": "pre",
                     "overflow-x": "scroll"
                     }
                 )
