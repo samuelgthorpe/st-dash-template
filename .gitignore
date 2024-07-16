@@ -6,7 +6,6 @@
 .venv
 .ignore
 local.db
-**/data
 **/batch
 **/run
 **/logs
