@@ -14,9 +14,10 @@ By Samuel Thorpe
 # -----------------------------------------------------|
 import os
 from os.path import join
-from sampy.utils import load_yaml
+import json
 import pandas as pd
 from openai import OpenAI
+from sampy.utils import load_yaml
 
 
 def load_txt(filename):
@@ -25,14 +26,20 @@ def load_txt(filename):
         return fh.read()
 
 
+def load_json(filename):
+    """Load text data."""
+    with open(filename) as fh:
+        return json.load(fh)
+
+
 def load_data():
     """Load data."""
     data_dir = 'data/bmi'
     prompt_dir = 'templates/prompts/bmi'
     return dict(
         dfr=pd.read_csv(join(data_dir, 'dataframe.csv')),
-        dct=load_yaml(join(data_dir, 'dictionary.yaml')),
-        desc=load_txt(join(data_dir, 'description.txt')),
+        meta=load_yaml(join(data_dir, 'meta.yaml')),
+        desc=load_json(join(data_dir, 'description.json')),
         cmd_prompt=load_txt(join(prompt_dir, 'cmd.txt')),
         chat_prompt=load_txt(join(prompt_dir, 'chat.txt'))
         )

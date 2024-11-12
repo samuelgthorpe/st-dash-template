@@ -45,7 +45,7 @@ def build_layout():
             },
             children=[
                 html.H2(
-                    f' {data["dct"]["meta"]["name"]} Dataset Explorer',
+                    f' {data["meta"]["name"]} Dataset Explorer',
                     style={"display": "inline-block"}
                     ),
                 html.Img(
@@ -55,7 +55,7 @@ def build_layout():
             ]
         ),
         dcc.Markdown(f'''
-            {data['desc']}
+            {data['desc']['header']}
             '''),
         dash_table.DataTable(
             data=data['dfr'].to_dict('records'),
@@ -107,8 +107,13 @@ def update_output(n_clicks, value):
 def build_prompt_from_user_input(value):
     """Build the OpenAi prompt."""
     if value and value[:5] == "chat:":
-        return data["chat_prompt"] + f' {value}', 'chat'
-    return data["cmd_prompt"] + f' {value}', 'cmd'
+        prompt = f'{data["desc"]['prompt']}\n {data["chat_prompt"]}\n {value}'
+        flag = 'chat'
+    else:
+        prompt = f'{data["desc"]['prompt']}\n {data["cmd_prompt"]}\n {value}'
+        flag = 'cmd'
+
+    return prompt, flag
 
 
 def get_completion(prompt):

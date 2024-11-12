@@ -1,1 +1,0 @@
-This dataset gives information about the height, weight, gender, age and Body Mass Index (BMI) of various people in a sample population. The dataset consists of a table with 108 rows corresponding to observations for an individual, and seven columns corresponding to the individuals reported age, gender, height, weight, BMI, BMI label, and BMI label index, respectively.
