@@ -3,14 +3,15 @@ matplotlib
 boto3
 psutil
 PyYAML
-git+https://${GITHUB_TOKEN}@github.com/samuelgthorpe/sampy.git@main
 numpy
 scipy
 pandas
 stats
+statsmodels
 dash
 plotly
 markdown-strings
 openai
 dash-extensions
 dash_bootstrap_components
+git+https://${GITHUB_TOKEN}@github.com/samuelgthorpe/sampy.git@main

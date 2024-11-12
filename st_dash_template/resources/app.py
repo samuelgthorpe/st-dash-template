@@ -33,7 +33,8 @@ def load_data():
         dfr=pd.read_csv(join(data_dir, 'dataframe.csv')),
         dct=load_yaml(join(data_dir, 'dictionary.yaml')),
         desc=load_txt(join(data_dir, 'description.txt')),
-        prompt=load_txt(join(prompt_dir, 'cmd.txt'))
+        cmd_prompt=load_txt(join(prompt_dir, 'cmd.txt')),
+        chat_prompt=load_txt(join(prompt_dir, 'chat.txt'))
         )
 
 
