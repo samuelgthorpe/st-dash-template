@@ -110,10 +110,10 @@ def update_output(n_clicks, value):
 def build_prompt_from_user_input(value):
     """Build the OpenAi prompt."""
     if value and value[:5] == "chat:":
-        prompt = f'{data["desc"]['prompt']}\n {data["chat_prompt"]}\n {value}'
+        prompt = f'{data['base_prompt']}\n {data["chat_prompt"]}\n {value}'
         flag = 'chat'
     else:
-        prompt = f'{data["desc"]['prompt']}\n {data["cmd_prompt"]}\n {value}'
+        prompt = f'{data['base_prompt']}\n {data["cmd_prompt"]}\n {value}'
         flag = 'cmd'
 
     return prompt, flag
@@ -181,9 +181,9 @@ def evaluate_response(response):
         compiled = compile(response, 'multistring', 'exec')
         module = ModuleType("testmodule")
         exec(compiled, module.__dict__)
-        return module.response_function(data['dfr'])
+        return module.response_function(data['dfr'].copy())
     except Exception as err:
-        return err.__str__()
+        return f'Encountered error: "{err.__str__()}"'
 
 
 def munge_validate_response(response):

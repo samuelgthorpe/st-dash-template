@@ -2,49 +2,41 @@ name: BMI
 url: https://www.kaggle.com/datasets/sujithmandala/obesity-classification-dataset
 data:
   Age:
-    type: int
+    desc: the age of the individual
+    type: Ordinal
     units: Years
-    labels:
-      - ordinal
-      - discrete
-  Gender:
-    type: string
-    labels:
-      - categorical:
-          - Male
-          - Female
+  Sex:
+    desc: the biological sex of the individual
+    type: Categorical
+    categories:
+      - Male
+      - Female
   Height:
-    type: float
+    desc: the height of the individual
+    type: Ordinal
     units: Centimeters
-    labels:
-      - numerical
-      - continuous
   Weight:
-    type: float
+    desc: the weight of the individual
+    type: Ordinal
     units: Kilograms
-    labels:
-      - numerical
-      - continuous
   BMI:
-    type: float
+    desc: the Body Mass Index (BMI) of the individual
+    type: Continuous
     units: kg/m2
-    labels:
-      - numerical
-      - continuous
   BmiLabel:
-    type: string
-    labels:
-      - categorical:
-        - Underweight
-        - Normal Weight
-        - Overweight
-        - Obese
+    desc: the BMI category assigned to the individual
+    type: Categorical
+    categories:
+      - Underweight
+      - Normal Weight
+      - Overweight
+      - Obese
   BmiLabelIndex:
-    type: int
+    desc: the BMI label index for each individual as an integer
+    type: index
     index: BmiLabel
     labels:
-      - categorical:
-        - 1: Underweight
-        - 2: Normal Weight
-        - 3: Overweight
-        - 4: Obese
+      1: Underweight
+      2: Normal Weight
+      3: Overweight
+      4: Obese

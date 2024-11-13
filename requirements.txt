@@ -8,6 +8,7 @@ scipy
 pandas
 stats
 statsmodels
+scikit-learn
 dash
 plotly
 markdown-strings

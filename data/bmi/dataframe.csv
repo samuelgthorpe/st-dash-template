@@ -1,4 +1,4 @@
-Age,Gender,Height,Weight,BMI,BmiLabel,BmiLabelIndex
+Age,Sex,Height,Weight,BMI,BmiLabel,BmiLabelIndex
 25,Male,175,80,25.3,Normal Weight,1
 30,Female,160,60,22.5,Normal Weight,1
 35,Male,180,90,27.3,Overweight,2
