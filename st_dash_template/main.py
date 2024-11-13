@@ -14,6 +14,7 @@ Written by Samuel Thorpe
 from resources.app import data, openai_client
 from types import ModuleType
 from markdown_strings import code_block
+from datetime import datetime
 import plotly
 import pandas  # noqa
 import numpy  # noqa
@@ -29,6 +30,11 @@ from dash import (
     State,
     callback,
     dcc)
+
+
+# # Imports
+# -----------------------------------------------------|
+DOWNLOAD_DIR = '/home/sam/Downloads'
 
 
 # # Helper Methods
@@ -71,19 +77,15 @@ def build_layout():
                 style={'whiteSpace': 'pre-line'}
                 ),
             dcc.Textarea(
-                id='textarea-example',
+                id='textarea-input',
                 style={'width': '99%', 'height': 30},
                 ),
             html.Button(
                 'Submit',
-                id='textarea-state-example-button',
+                id='textarea-submit-button',
                 n_clicks=0),
             html.Div(
-                '\nOutput',
-                style={'whiteSpace': 'pre-line'}
-                ),
-            html.Div(
-                id='textarea-example-output',
+                id='textarea-output',
                 style={'whiteSpace': 'pre-line'}
                 )
             ])
@@ -91,9 +93,9 @@ def build_layout():
 
 
 @callback(
-    Output('textarea-example-output', 'children'),
-    Input('textarea-state-example-button', 'n_clicks'),
-    State('textarea-example', 'value')
+    Output('textarea-output', 'children'),
+    Input('textarea-submit-button', 'n_clicks'),
+    State('textarea-input', 'value')
 )
 def update_output(n_clicks, value):
     """Update the html output div."""
@@ -136,7 +138,13 @@ def handle_response(response, flag):
                 code_block(response, 'python'),
                 dangerously_allow_html=True,
                 style={"overflow-x": "scroll"}
-            )
+            ),
+            dcc.Store(id="text-store", data=response),
+            html.Button(
+                'Download',
+                id='code-download-button',
+                n_clicks=0),
+            html.Div(id="file-message", style={"margin-top": "20px"}),
         ]
 
         if isinstance(evaluated, plotly.graph_objects.Figure):
@@ -189,11 +197,35 @@ def munge_validate_response(response):
     return response
 
 
+@callback(
+    Output("file-message", "children"),
+    Input('code-download-button', 'n_clicks'),
+    State('text-store', 'data'),
+    prevent_initial_call=True
+)
+def download_code(n_clicks, code):
+    """Download the code Python block."""
+    if n_clicks > 0:
+        tag = '_'.join(data["meta"]["name"].split())
+        file_path = f'{DOWNLOAD_DIR}/{tag}_method_{_now()}.py'
+        with open(file_path, "w") as file:
+            file.write(code)
+
+        return f"File saved to: {file_path}"
+
+
+def _now():
+    """Return string with current datetime."""
+    now = datetime.now()
+    now_str = now.strftime("%Y-%m-%dT%H:%M:%S")
+    return now_str
+
+
 # # Main Method
 # -----------------------------------------------------|
 def main():
     """Run main method."""
-    app = Dash(__name__)
+    app = Dash(__name__, suppress_callback_exceptions=True)
     app.layout = build_layout()
     app.run(debug=True)
 
