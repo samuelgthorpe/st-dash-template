@@ -144,7 +144,10 @@ def handle_response(response, flag):
                 'Download',
                 id='code-download-button',
                 n_clicks=0),
-            html.Div(id="file-message", style={"margin-top": "20px"}),
+            html.Div(
+                id="file-message",
+                style={"margin-top": "5px", "font-size": 11}
+                ),
         ]
 
         if isinstance(evaluated, plotly.graph_objects.Figure):
@@ -162,7 +165,7 @@ def handle_response(response, flag):
     elif flag == 'chat':
         children = [
             dcc.Markdown(
-                f'Chat Response: \n{response}',
+                f'Chat Response: \n\n{response}',
                 dangerously_allow_html=True,
                 style={"overflow-x": "scroll"}
                 )
