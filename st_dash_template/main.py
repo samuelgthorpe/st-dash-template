@@ -35,6 +35,7 @@ from dash import (
 # # Imports
 # -----------------------------------------------------|
 DOWNLOAD_DIR = '/home/sam/Downloads'
+GPT_MODEL = "gpt-3.5-turbo"
 
 
 # # Helper Methods
@@ -121,7 +122,7 @@ def build_prompt_from_user_input(value):
 def get_completion(prompt):
     """Call to OpenAi API to get completion."""
     completion = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=GPT_MODEL,
         messages=[{"role": "user", "content": prompt}]
         )
     response = completion.choices[0].message.content
