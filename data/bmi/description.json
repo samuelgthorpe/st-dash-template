@@ -1,6 +1,6 @@
 {
     "header":
-        "This dataset gives information about the height, weight, sex, age and Body Mass Index (BMI) of various people in a sample population. The dataset consists of a table with rows corresponding to observations for an individual, and columns corresponding to the individuals reported age, sex, height, weight, BMI, BMI label, and BMI label index, respectively.",
+        "This dataset gives patient reviews on specific drugs along with related conditions and a 10 star patient rating reflecting overall patient satisfaction. The data was obtained by crawling online pharmaceutical review sites. It has rows corresponding to idividual reviews, and columns corresponding to review ID, drug name reviewed, the condition the drug is taken to treat, the review text provided by the user, the user provided drug rating, the review date, and the number of times the review was deemed useful by other users.",
     "prompt_template":
         "I am going to describe a dataset that {}.\n The data columns are described as follows: {}\n The dataset and more details about it can be found at the following url: {}"
 }

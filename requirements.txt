@@ -15,4 +15,5 @@ markdown-strings
 openai
 dash-extensions
 dash_bootstrap_components
+ucimlrepo
 git+https://${GITHUB_TOKEN}@github.com/samuelgthorpe/sampy.git@main

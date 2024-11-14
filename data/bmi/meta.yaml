@@ -1,42 +1,24 @@
-name: BMI
-url: https://www.kaggle.com/datasets/sujithmandala/obesity-classification-dataset
+name: Drug Reviews
+url: 'https://archive.ics.uci.edu/static/public/462/data.csv'
 data:
-  Age:
-    desc: the age of the individual
-    type: Ordinal
-    units: Years
-  Sex:
-    desc: the biological sex of the individual
+  id:
+    desc: the unique review identifier
+    type: integer
+  drugName:
+    desc: the name of the drug
     type: Categorical
-    categories:
-      - Male
-      - Female
-  Height:
-    desc: the height of the individual
-    type: Ordinal
-    units: Centimeters
-  Weight:
-    desc: the weight of the individual
-    type: Ordinal
-    units: Kilograms
-  BMI:
-    desc: the Body Mass Index (BMI) of the individual
-    type: Continuous
-    units: kg/m2
-  BmiLabel:
-    desc: the BMI category assigned to the individual
+  condition:
+    desc: the name of the disease the drug is taken to treat
     type: Categorical
-    categories:
-      - Underweight
-      - Normal Weight
-      - Overweight
-      - Obese
-  BmiLabelIndex:
-    desc: the BMI label index for each individual as an integer
-    type: index
-    index: BmiLabel
-    labels:
-      1: Underweight
-      2: Normal Weight
-      3: Overweight
-      4: Obese
+  review:
+    desc: the drug review provided by the user
+    type: text
+  rating:
+    desc: the drug rating provided by the user
+    type: Ordinal
+  date:
+    desc: the date of the review
+    type: datetime
+  usefulCount:
+    desc: the number of users who found the review useful
+    type: ordinal

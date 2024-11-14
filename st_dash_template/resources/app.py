@@ -15,7 +15,7 @@ By Samuel Thorpe
 import os
 from os.path import join
 import json
-import pandas as pd
+from ucimlrepo import fetch_ucirepo
 from openai import OpenAI
 from sampy.utils import load_yaml
 
@@ -37,7 +37,7 @@ def load_data():
     data_dir = 'data/bmi'
     prompt_dir = 'templates/prompts/bmi'
     data = dict(
-        dfr=pd.read_csv(join(data_dir, 'dataframe.csv')),
+        dfr=load_uci_dataset(),
         meta=load_yaml(join(data_dir, 'meta.yaml')),
         desc=load_json(join(data_dir, 'description.json')),
         cmd_prompt=load_txt(join(prompt_dir, 'cmd.txt')),
@@ -46,6 +46,12 @@ def load_data():
     data['base_prompt'] = _build_base_prompt(data)
 
     return data
+
+
+def load_uci_dataset():
+    """Return the dataset as dataframe."""
+    dat = fetch_ucirepo(id=462)
+    return dat.data.features
 
 
 def _build_base_prompt(data):
@@ -65,13 +71,16 @@ def _build_column_description(meta):
         if "units" in dct:
             col_str += f'The units are given in {dct["units"]}. '
         col_str += f'It is of type {dct["type"]}. '
-        if dct['type'].lower() == 'categorical':
+        if dct['type'].lower() == 'categorical' and 'categories' in dct:
             cats = ', '.join(dct['categories'])
             col_str += f'The associated data categories are: {cats}. '
-        if dct['type'].lower() == 'index':
+        if dct['type'].lower() == 'index' and 'labels' in dct:
             col_str += f'It indexes categories in the {dct["index"]} column. '
             cat_map = [f'{k} = {v}' for k, v in dct["labels"].items()]
             col_str += f'The mapping is given by: {", ".join(cat_map)}.'
+        if dct['type'].lower() == 'datetime':
+            col_str += 'Please interpret these strings as datetime objects '
+            col_str += 'where necessary. '
 
     return col_str
 
