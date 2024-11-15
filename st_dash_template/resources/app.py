@@ -15,6 +15,7 @@ By Samuel Thorpe
 import os
 from os.path import join
 import json
+import pandas as pd
 from ucimlrepo import fetch_ucirepo
 from openai import OpenAI
 from sampy.utils import load_yaml
@@ -51,7 +52,11 @@ def load_data():
 def load_uci_dataset():
     """Return the dataset as dataframe."""
     dat = fetch_ucirepo(id=462)
-    return dat.data.features
+    dfr = dat.data.features
+    cols = ['date', 'drugName', 'condition', 'rating', 'usefulCount', 'review']
+    dfr['dt'] = pd.to_datetime(dfr.date, format="%d-%b-%y")
+    dfr = dfr.sort_values('dt', ignore_index=True)
+    return dfr[cols]
 
 
 def _build_base_prompt(data):
