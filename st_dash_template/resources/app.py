@@ -15,9 +15,9 @@ By Samuel Thorpe
 import os
 from os.path import join
 import json
+import yaml
 import pandas as pd
 from openai import OpenAI
-from sampy.utils import load_yaml
 
 
 def load_txt(filename):
@@ -30,6 +30,12 @@ def load_json(filename):
     """Load text data."""
     with open(filename) as fh:
         return json.load(fh)
+
+
+def load_yaml(filename):
+    """Load specified yaml file."""
+    with open(filename, 'r') as file:
+        return yaml.safe_load(file)
 
 
 def load_data():
